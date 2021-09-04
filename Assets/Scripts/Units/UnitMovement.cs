@@ -1,21 +1,19 @@
 using Mirror;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
+
 
 public class UnitMovement : NetworkBehaviour
 {
 
     [SerializeField] private NavMeshAgent agent = null;
 
-    private Camera mainCamera;
+    //private Camera mainCamera;
 
     #region Server
 
     [Command]
-    private void CmdMove(Vector3 position)
+    public void CmdMove(Vector3 position)
     {
         //is it a valid pos
         if(!NavMesh.SamplePosition(position,out NavMeshHit hit, 1f, NavMesh.AllAreas))
@@ -27,31 +25,5 @@ public class UnitMovement : NetworkBehaviour
     }
     #endregion
 
-    #region Client
-
-    public override void OnStartAuthority()
-    {
-        base.OnStartAuthority();
-        mainCamera = Camera.main;
-    }
-
-    [ClientCallback]
-    private void Update()
-    {
-        if(!hasAuthority || !Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            return;
-        }
-
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        if(!Physics.Raycast(ray,out RaycastHit hit, Mathf.Infinity))
-        {
-            return;
-        }
-
-        CmdMove(hit.point);
-    }
-
-    #endregion
+   
 }

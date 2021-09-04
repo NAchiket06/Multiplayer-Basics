@@ -11,7 +11,7 @@ public class UnitSelectionHandler : MonoBehaviour
     private Camera mainCamera;
 
 
-    [SerializeField] private List<Unit> SelectedUnits = new List<Unit>();
+    [SerializeField] public List<Unit> SelectedUnits { get; } = new List<Unit>();
     private void Start()
     {
         mainCamera = Camera.main;

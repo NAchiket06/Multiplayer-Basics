@@ -219,20 +219,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3379110591065162342, guid: e67a0efc7cb5e2f4eb1d6194c03b2069, type: 3}
       propertyPath: onlineScene
-      value: Assets/Scenes/SampleScene.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 3379110591065162342, guid: e67a0efc7cb5e2f4eb1d6194c03b2069, type: 3}
-      propertyPath: offlineScene
-      value: Assets/Scenes/Scene_Menu.unity
+      value: Assets/Scenes/Scene_Map_01.unity
       objectReference: {fileID: 0}
     - target: {fileID: 3379110591065162342, guid: e67a0efc7cb5e2f4eb1d6194c03b2069, type: 3}
       propertyPath: spawnPrefabs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3379110591065162342, guid: e67a0efc7cb5e2f4eb1d6194c03b2069, type: 3}
-      propertyPath: spawnPrefabs.Array.data[2]
+      propertyPath: spawnPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 8775423648292169326, guid: 704fe9d2414d612448f14384170a62bb, type: 3}
+      objectReference: {fileID: 8098309276134938971, guid: 446e69268ffa2a743aa7f5c4b48ff8bb, type: 3}
     - target: {fileID: 3379110591065162345, guid: e67a0efc7cb5e2f4eb1d6194c03b2069, type: 3}
       propertyPath: m_RootOrder
       value: 2

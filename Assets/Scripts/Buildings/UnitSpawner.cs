@@ -29,7 +29,7 @@ public class UnitSpawner : NetworkBehaviour,IPointerClickHandler
     [Server]
     private void HandleServerOnDeath()
     {
-        NetworkServer.Destroy(gameObject);
+        //NetworkServer.Destroy(gameObject);
     }
 
 

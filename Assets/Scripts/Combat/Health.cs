@@ -37,8 +37,8 @@ public class Health : NetworkBehaviour
 
         ServerOnDie?.Invoke();
 
-        Debug.Log("Died");
-        Destroy(gameObject);
+        //Debug.Log("Died");
+        //Destroy(gameObject);
     }
     #endregion
 

@@ -7,23 +7,75 @@ public class UnitMovement : NetworkBehaviour
 {
 
     [SerializeField] private NavMeshAgent agent = null;
-
+    [SerializeField] private Targetter targeter = null;
+    [SerializeField] private float ChaseRange = 10f;
     //private Camera mainCamera;
 
     #region Server
+    // Command attribute: runs the client function on the server machine
 
-    [Command]
-    public void CmdMove(Vector3 position)
+    [ServerCallback]
+    private void Update()
     {
-        //is it a valid pos
-        if(!NavMesh.SamplePosition(position,out NavMeshHit hit, 1f, NavMesh.AllAreas))
+
+        //check if target exists
+        Targetable target = targeter.getTarget();
+
+        if(target != null)
+        {
+
+            //if target is NOT in range of units chase distance
+            if((target.transform.position - transform.position).sqrMagnitude > ChaseRange * ChaseRange)
+            {
+                //move the unit to target
+                agent.SetDestination(target.transform.position);
+            }
+            // if unit is in range of target
+            else if(agent.hasPath)
+            {
+
+                // reset the navemesh
+                agent.ResetPath();
+
+                //shoot enemy tank
+
+
+            }
+
+            return;
+        }
+            
+        if (!agent.hasPath)
         {
             return;
         }
 
-        agent.SetDestination(hit.position);
+        if (agent.remainingDistance > agent.stoppingDistance)
+        {
+            return;
+        }
+        
+        agent.ResetPath();
     }
+
+    //server decides if the hit position is valid or not.
+    [Command]
+    public void CmdMove(Vector3 position)
+    {
+        Debug.Log($"Cleared target for {gameObject.name}");
+        targeter.ClearTarget();
+        
+        //if it is not a valid pos, return and do not move to the pos
+        if(!NavMesh.SamplePosition(position,out NavMeshHit hit, 1f, NavMesh.AllAreas))
+        {
+            return; 
+        }
+
+        agent.SetDestination(hit.position);
+
+    }
+   
     #endregion
 
-   
+
 }

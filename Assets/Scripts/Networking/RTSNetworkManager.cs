@@ -1,9 +1,7 @@
 using Mirror;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RTSNetworkManager: NetworkManager
+public class RTSNetworkManager : NetworkManager
 {
 
     [SerializeField] private GameObject UnitSpawnerPrefab = null;
@@ -17,8 +15,9 @@ public class RTSNetworkManager: NetworkManager
     {
         base.OnServerAddPlayer(conn);
 
+        // instantiate the unit spawner on the client machine
         GameObject unitInstance = Instantiate(UnitSpawnerPrefab, conn.identity.transform.position, conn.identity.transform.rotation);
-
+        // instantiate the same unit in the server
         NetworkServer.Spawn(unitInstance, conn);
     }
 }

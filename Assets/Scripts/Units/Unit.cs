@@ -8,6 +8,7 @@ using System;
 public class Unit : NetworkBehaviour
 {
     [SerializeField] private UnitMovement unitMovement = null; 
+    [SerializeField] private Targetter targetter= null;
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
 
@@ -20,6 +21,11 @@ public class Unit : NetworkBehaviour
     public UnitMovement GetUnitMovement()
     {
         return unitMovement;
+    }
+
+    public Targetter GetTargetter()
+    {
+        return targetter;
     }
 
     #region Server
@@ -56,6 +62,8 @@ public class Unit : NetworkBehaviour
         AuthorityOnUnitDeSpawned?.Invoke(this);
     }
 
+    // if unit is selected, enables sprite beneath it
+
     [Client]
     public void Select()
     {
@@ -66,6 +74,9 @@ public class Unit : NetworkBehaviour
         }
         onSelected?.Invoke();
     }
+
+
+    // if unit is deselected, disables sprite beneath it
 
     [Client]
     public void Deselect()

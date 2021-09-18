@@ -7,6 +7,7 @@ using UnityEngine;
 public class UnitBase : NetworkBehaviour
 {
 
+    public static event Action<int> ServerOnPlayerDie;
     [SerializeField] private Health health;
 
     public static event Action<UnitBase> ServerOnBaseSpawned;
@@ -33,6 +34,8 @@ public class UnitBase : NetworkBehaviour
     [Server]
     private void HandleServerDeath()
     {
+        ServerOnPlayerDie?.Invoke(connectionToClient.connectionId);
+
         NetworkServer.Destroy(gameObject);
     }
     #endregion

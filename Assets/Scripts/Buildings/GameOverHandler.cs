@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GameOverHandler : NetworkBehaviour
 {
+
+    public static event Action ServerOnGameOver;
     public static event Action<string> ClientOnGameOver;
 
     [SerializeField] private List<UnitBase> bases = new List<UnitBase>();
@@ -43,6 +45,8 @@ public class GameOverHandler : NetworkBehaviour
         int winnerID = bases[0].connectionToClient.connectionId;
 
         RPCGameOver($"Player {winnerID}");
+
+        ServerOnGameOver?.Invoke(); 
     }
     #endregion
 

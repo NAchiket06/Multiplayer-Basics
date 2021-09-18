@@ -12,6 +12,17 @@ public class UnitMovement : NetworkBehaviour
     //private Camera mainCamera;
 
     #region Server
+
+    public override void OnStartServer()
+    {
+        GameOverHandler.ServerOnGameOver += ServerHandleGameOver;
+    }
+    public override void OnStopServer()
+    {
+        GameOverHandler.ServerOnGameOver -= ServerHandleGameOver;
+
+    }
+
     // Command attribute: runs the client function on the server machine
 
     [ServerCallback]
@@ -75,6 +86,11 @@ public class UnitMovement : NetworkBehaviour
 
     }
    
+    [Server]
+    private void ServerHandleGameOver()
+    {
+        agent.ResetPath();
+    }
     #endregion
 
 

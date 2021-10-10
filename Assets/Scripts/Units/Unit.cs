@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
-using UnityEngine.Events;
 using System;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class Unit : NetworkBehaviour
 {
     [SerializeField] private Health health;
-    [SerializeField] private UnitMovement unitMovement = null; 
-    [SerializeField] private Targetter targetter= null;
+    [SerializeField] private UnitMovement unitMovement = null;
+    [SerializeField] private Targetter targetter = null;
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
 
@@ -72,7 +70,7 @@ public class Unit : NetworkBehaviour
     public void Select()
     {
 
-        if(!hasAuthority)
+        if (!hasAuthority)
         {
             return;
         }

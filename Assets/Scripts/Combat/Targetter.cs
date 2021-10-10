@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
+using UnityEngine;
 
 public class Targetter : NetworkBehaviour
 {
@@ -25,7 +23,7 @@ public class Targetter : NetworkBehaviour
     [Command]
     public void CmdSetTarget(GameObject targetGameobject)
     {
-        if(!targetGameobject.TryGetComponent<Targetable>(out Targetable newTarget))
+        if (!targetGameobject.TryGetComponent<Targetable>(out Targetable newTarget))
         {
             return;
         }
